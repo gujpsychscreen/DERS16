@@ -94,10 +94,10 @@ function buildLikert(containerId, questions, opts, prefix) {
   let html = "";
   questions.forEach((q, i) => {
     html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
-      <div class="scale-row" id="${prefix}_${i}">`;
+      <div class="scale-row" id="${prefix}_${i+1}">`;
     opts.forEach((o, j) => {
       html += `<label class="scale-opt">
-        <input type="radio" name="${prefix}_${i}" value="${j}" onchange="markScale(this,'${prefix}_${i}')">
+        <input type="radio" name="${prefix}_${i+1}" value="${j}" onchange="markScale(this,'${prefix}_${i+1}')">
         <span>${o}</span></label>`;
     });
     html += `</div></div>`;
@@ -109,11 +109,11 @@ function buildDERS(containerId, questions) {
   let html = "";
   questions.forEach((q, i) => {
     html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
-      <div class="scale-row-5" id="ders_${i}">`;
+      <div class="scale-row-5" id="ders_${i+1}">`;
     const labels = ["1\nક્યારેય નહીં","2","3","4","5\nહંમેશા"];
     labels.forEach((l, j) => {
       html += `<label class="scale-opt">
-        <input type="radio" name="ders_${i}" value="${j+1}" onchange="markScale(this,'ders_${i}')">
+        <input type="radio" name="ders_${i+1}" value="${j+1}" onchange="markScale(this,'ders_${i+1}')">
         <span>${l}</span></label>`;
     });
     html += `</div></div>`;
@@ -125,9 +125,9 @@ function buildYesNo(containerId, questions, prefix) {
   let html = "";
   questions.forEach((q, i) => {
     html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
-      <div class="options-row" id="${prefix}_${i}">
-        <label class="opt-label"><input type="radio" name="${prefix}_${i}" value="હા" onchange="selectOpt(this)"> હા</label>
-        <label class="opt-label"><input type="radio" name="${prefix}_${i}" value="ના" onchange="selectOpt(this)"> ના</label>
+      <div class="options-row" id="${prefix}_${i+1}">
+        <label class="opt-label"><input type="radio" name="${prefix}_${i+1}" value="હા" onchange="selectOpt(this)"> હા</label>
+        <label class="opt-label"><input type="radio" name="${prefix}_${i+1}" value="ના" onchange="selectOpt(this)"> ના</label>
       </div></div>`;
   });
   document.getElementById(containerId).innerHTML = html;
