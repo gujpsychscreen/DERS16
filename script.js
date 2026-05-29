@@ -1,7 +1,7 @@
 // ============================================================
 // CONFIGURATION — REPLACE THIS URL WITH YOUR APPS SCRIPT URL
 // ============================================================
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzuUYT5cYFASaNWW0ftKvev3tXu_4Y04vPTG9r4-u3O2Rkdh1JpnMJOWQ_wT1QOkWSiCw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby5BS2dzkkZfsforFRlfvXehYadpdYpUqZnel15HK5nbYyJN3r293M8JQkzMi576H4DbA/exec";
 // ============================================================
 
 const PHQ9_Q = [
