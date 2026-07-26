@@ -98,6 +98,22 @@ const SAPAS_Q = [
   "8. સામાન્ય રીતે, શું તમારો સ્વભાવ વધુ પડતી ચોકસાઈ વાળો છે?"
 ];
 buildYesNo('sapas_qs', SAPAS_Q, 'sapas');
+function buildYesNo(containerId, questions, prefix) {
+  let html = "";
+  questions.forEach((q, i) => {
+    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
+      <div class="scale-row" id="${prefix}_${i+1}">
+        <label class="scale-opt">
+          <input type="radio" name="${prefix}_${i+1}" value="હા" onchange="markScale(this,'${prefix}_${i+1}')">
+          <span>હા</span></label>
+        <label class="scale-opt">
+          <input type="radio" name="${prefix}_${i+1}" value="ના" onchange="markScale(this,'${prefix}_${i+1}')">
+          <span>ના</span></label>
+      </div></div>`;
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
+
 
 function buildLikert(containerId, questions, opts, prefix,startAt = 0) {
   let html = "";
@@ -130,21 +146,7 @@ function buildDERS(containerId, questions) {
   document.getElementById(containerId).innerHTML = html;
 }
 
-function buildYesNo(containerId, questions, prefix) {
-  let html = "";
-  questions.forEach((q, i) => {
-    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
-      <div class="scale-row" id="${prefix}_${i+1}">
-        <label class="scale-opt">
-          <input type="radio" name="${prefix}_${i+1}" value="હા" onchange="markScale(this,'${prefix}_${i+1}')">
-          <span>હા</span></label>
-        <label class="scale-opt">
-          <input type="radio" name="${prefix}_${i+1}" value="ના" onchange="markScale(this,'${prefix}_${i+1}')">
-          <span>ના</span></label>
-      </div></div>`;
-  });
-  document.getElementById(containerId).innerHTML = html;
-}
+
 
 function selectOpt(el) {
   el.closest('.options-row').querySelectorAll('.opt-label').forEach(l => l.classList.remove('selected'));
