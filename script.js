@@ -46,6 +46,7 @@ const DERS16_Q = [
   "૧૫. [DERS-16 Item 15 — Gujarati translation pending]",
   "૧૬. [DERS-16 Item 16 — Gujarati translation pending]"
 ];
+const DERS16_OPTS = ["લગભગ ક્યારેય નહીં","ક્યારેક","લગભગ અડધી વખતે","મોટાભાગે","લગભગ હંમેશા"];
 
 const BEDS_Q = [
   "1. હું સરળતાથી રડી પડું છું.",
@@ -90,14 +91,14 @@ const SAPAS_Q = [
   "8. સામાન્ય રીતે, શું તમારો સ્વભાવ વધુ પડતી ચોકસાઈ વાળો છે?"
 ];
 
-function buildLikert(containerId, questions, opts, prefix) {
+function buildLikert(containerId, questions, opts, prefix,startAt = 0) {
   let html = "";
   questions.forEach((q, i) => {
     html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
       <div class="scale-row" id="${prefix}_${i+1}">`;
     opts.forEach((o, j) => {
       html += `<label class="scale-opt">
-        <input type="radio" name="${prefix}_${i+1}" value="${j}" onchange="markScale(this,'${prefix}_${i+1}')">
+        <input type="radio" name="${prefix}_${i+1}" value="${j = startAt}" onchange="markScale(this,'${prefix}_${i+1}')">
         <span>${o}</span></label>`;
     });
     html += `</div></div>`;
@@ -110,7 +111,7 @@ function buildDERS(containerId, questions) {
   questions.forEach((q, i) => {
     html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
       <div class="scale-row-5" id="ders_${i+1}">`;
-    const labels = ["1\nક્યારેય નહીં","2","3","4","5\nહંમેશા"];
+    const labels = ["લગભગ ક્યારેય નહીં","ક્યારેક","લગભગ અડધી વખતે","મોટાભાગે","લગભગ હંમેશા"];
     labels.forEach((l, j) => {
       html += `<label class="scale-opt">
         <input type="radio" name="ders_${i+1}" value="${j+1}" onchange="markScale(this,'ders_${i+1}')">
@@ -125,9 +126,13 @@ function buildYesNo(containerId, questions, prefix) {
   let html = "";
   questions.forEach((q, i) => {
     html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
-      <div class="options-row" id="${prefix}_${i+1}">
-        <label class="opt-label"><input type="radio" name="${prefix}_${i+1}" value="હા" onchange="selectOpt(this)"> હા</label>
-        <label class="opt-label"><input type="radio" name="${prefix}_${i+1}" value="ના" onchange="selectOpt(this)"> ના</label>
+      <div class="scale-row" id="${prefix}_${i+1}">
+        <label class="scale-opt">
+          <input type="radio" name="${prefix}_${i+1}" value="હા" onchange="markScale(this,'${prefix}_${i+1}')">
+          <span>હા</span></label>
+        <label class="scale-opt">
+          <input type="radio" name="${prefix}_${i+1}" value="ના" onchange="markScale(this,'${prefix}_${i+1}')">
+          <span>ના</span></label>
       </div></div>`;
   });
   document.getElementById(containerId).innerHTML = html;
@@ -211,8 +216,8 @@ function collectData() {
 buildLikert('phq9_qs', PHQ9_Q, PHQ_OPTS, 'phq9');
 buildLikert('gad7_qs', GAD7_Q, PHQ_OPTS, 'gad7');
 buildDERS('ders16_qs', DERS16_Q);
-buildLikert('beds_qs', BEDS_Q, BEDS_OPTS, 'beds');
-buildLikert('lpfs_qs', LPFS_Q, LPFS_OPTS, 'lpfs');
+buildLikert('beds_qs', BEDS_Q, BEDS_OPTS, 'beds',1);
+buildLikert('lpfs_qs', LPFS_Q, LPFS_OPTS, 'lpfs',1);
 buildYesNo('sapas_qs', SAPAS_Q, 'sapas');
 
 
