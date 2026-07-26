@@ -15,8 +15,22 @@ const PHQ9_Q = [
   "૮. એટલું ધીમેથી બોલવું કે ચાલવું કે જે બીજા લોકોના ધ્યાનમાં આવે? અથવા તેનાથી વિરુદ્ધ—એટલા બેચેન હોવું કે તમે સામાન્ય કરતા વધુ હલનચલન કરતા હોવ.",
   "૯. એવા વિચારો આવવા કે તમારા કરતા તો મૃત્યુ સારું અથવા તમારી જાતને કોઈ રીતે નુકસાન પહોંચાડવું."
 ];
-const PHQ_OPTS = ["બિલકુલ નહીં","કેટલાક દિવસો","અડધાથી વધુ દિવસો","લગભગ દરેક દિવસે"];
-buildLikert('phq9_qs', PHQ9_Q, PHQ_OPTS, 'phq9');
+buildPHQ('phq9_qs', PHQ9_Q);
+function buildPHQ(containerId, questions) {
+  let html = "";
+  questions.forEach((q, i) => {
+    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
+      <div class="scale-row" id="phq9_${i+1}">`;
+    const labels = ["બિલકુલ નહીં","કેટલાક દિવસો","અડધાથી વધુ દિવસો","લગભગ દરેક દિવસે"];
+    labels.forEach((l, j) => {
+      html += `<label class="scale-opt">
+        <input type="radio" name="phq9_${i+1}" value="${j}" onchange="markScale(this,'phq9_${i+1}')">
+        <span>${l}</span></label>`;
+    });
+    html += `</div></div>`;
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
 
 const GAD7_Q = [
   "૧. નર્વસ અથવા બેચેની અનુભવવી અથવા ખૂબ જ તણાવમાં રહેવું.",
@@ -27,9 +41,22 @@ const GAD7_Q = [
   "૬. સહેલાઈથી ચીડાઈ જવું અથવા ગુસ્સે થઈ જવું.",
   "૭. એવું લાગવું કે જાણે કંઈક ખરાબ થવાનું છે."
 ];
-const GAD_OPTS = ["બિલકુલ નહીં","કેટલાક દિવસો","અડધાથી વધુ દિવસો","લગભગ દરેક દિવસે"];
-buildLikert('gad7_qs', GAD7_Q, PHQ_OPTS, 'gad7');
-
+buildGAD('gad7_qs', GAD7_Q);
+function buildGAD(containerId, questions) {
+  let html = "";
+  questions.forEach((q, i) => {
+    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
+      <div class="scale-row" id="gad7_${i+1}">`;
+    const labels = ["બિલકુલ નહીં","કેટલાક દિવસો","અડધાથી વધુ દિવસો","લગભગ દરેક દિવસે"];
+    labels.forEach((l, j) => {
+      html += `<label class="scale-opt">
+        <input type="radio" name="gad7_${i+1}" value="${j}" onchange="markScale(this,'gad7_${i+1}')">
+        <span>${l}</span></label>`;
+    });
+    html += `</div></div>`;
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
 
 // DERS-16 Gujarati items — replace placeholders with actual translated items
 const DERS16_Q = [
@@ -82,8 +109,22 @@ const BEDS_Q = [
   "11. મારી લાગણીઓ ભાગ્યે જ મારા માટે સમસ્યાઓ ઊભી કરે છે.",
   "12. મારી લાગણીઓ મારા પર કાબૂ કરતી નથી."
 ];
-const BEDS_OPTS = ["એકદમ/પૂર્ણ રીતે/સંપૂર્ણપણે અસહમત","અસહમત","સહમત","એકદમ/પૂર્ણ રીતે/સંપૂર્ણપણે સહમત"];
-buildLikert('beds_qs', BEDS_Q, BEDS_OPTS, 'beds',1);
+buildBEDS('beds_qs', BEDS_Q);
+function buildBEDS(containerId, questions) {
+  let html = "";
+  questions.forEach((q, i) => {
+    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
+      <div class="scale-row" id="beds_${i+1}">`;
+    const labels = ["એકદમ/પૂર્ણ રીતે/સંપૂર્ણપણે અસહમત","અસહમત","સહમત","એકદમ/પૂર્ણ રીતે/સંપૂર્ણપણે સહમત"];
+    labels.forEach((l, j) => {
+      html += `<label class="scale-opt">
+        <input type="radio" name="beds_${i+1}" value="${j+1}" onchange="markScale(this,'beds_${i+1}')">
+        <span>${l}</span></label>`;
+    });
+    html += `</div></div>`;
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
 
 const LPFS_Q = [
   "1. હું ઘણીવાર એ નથી જાણતો/જાણતી કે હું ખરેખર કોણ છું.",
@@ -99,8 +140,22 @@ const LPFS_Q = [
   "11. જ્યારે લોકો સાથેના મારા સંબંધો વધુ અંગત (ઘનિષ્ઠ) બને છે, ત્યારે મને ચિંતા/ડર થાય છે કે મારી લાગણીઓને ઠેસ પહોંચશે.",
   "12. હું ઘણીવાર બીજા લોકો સાથે પરસ્પર(અરસપરસ)  સંતોષકારક રીતે સહકારપૂર્ણ  વ્યવહાર કરવામાં સફળ થતો/થતી નથી."
 ];
-const LPFS_OPTS = ["સાવ ખોટું/મોટાભાગે ખોટું","ક્યારેક ખોટું","ક્યારેક સાચું","સાવ સાચું/મોટાભાગે સાચું"];
-buildLikert('lpfs_qs', LPFS_Q, LPFS_OPTS, 'lpfs',1);
+buildLPFS('lpfs_qs', LPFS_Q);
+function buildLPFS(containerId, questions) {
+  let html = "";
+  questions.forEach((q, i) => {
+    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
+      <div class="scale-row" id="lpfs_${i+1}">`;
+    const labels = ["સાવ ખોટું/મોટાભાગે ખોટું","ક્યારેક ખોટું","ક્યારેક સાચું","સાવ સાચું/મોટાભાગે સાચું"];
+    labels.forEach((l, j) => {
+      html += `<label class="scale-opt">
+        <input type="radio" name="lpfs_${i+1}" value="${j+1}" onchange="markScale(this,'lpfs_${i+1}')">
+        <span>${l}</span></label>`;
+    });
+    html += `</div></div>`;
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
 
 const SAPAS_Q = [
   "1. સામાન્ય રીતે, શું તમને મિત્રો બનાવવામાં અને જાળવવામાં તકલીફ પડે છે?",
@@ -128,24 +183,6 @@ function buildYesNo(containerId, questions, prefix) {
   });
   document.getElementById(containerId).innerHTML = html;
 }
-
-
-function buildLikert(containerId, questions, opts, prefix,startAt = 0) {
-  let html = "";
-  questions.forEach((q, i) => {
-    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
-      <div class="scale-row" id="${prefix}_${i+1}">`;
-    opts.forEach((o, j) => {
-      html += `<label class="scale-opt">
-        <input type="radio" name="${prefix}_${i+1}" value="${j = startAt}" onchange="markScale(this,'${prefix}_${i+1}')">
-        <span>${o}</span></label>`;
-    });
-    html += `</div></div>`;
-  });
-  document.getElementById(containerId).innerHTML = html;
-}
-
-
 
 
 function selectOpt(el) {
