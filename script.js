@@ -52,6 +52,21 @@ const DERS16_Q = [
 ];
 const DERS16_OPTS = ["લગભગ ક્યારેય નહીં","ક્યારેક","લગભગ અડધી વખતે","મોટાભાગે","લગભગ હંમેશા"];
 buildDERS('ders16_qs', DERS16_Q);
+function buildDERS(containerId, questions) {
+  let html = "";
+  questions.forEach((q, i) => {
+    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
+      <div class="scale-row-5" id="ders_${i+1}">`;
+    const labels = ["લગભગ ક્યારેય નહીં","ક્યારેક","લગભગ અડધી વખતે","મોટાભાગે","લગભગ હંમેશા"];
+    labels.forEach((l, j) => {
+      html += `<label class="scale-opt">
+        <input type="radio" name="ders_${i+1}" value="${j+1}" onchange="markScale(this,'ders_${i+1}')">
+        <span>${l}</span></label>`;
+    });
+    html += `</div></div>`;
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
 
 const BEDS_Q = [
   "1. હું સરળતાથી રડી પડું છું.",
@@ -130,21 +145,6 @@ function buildLikert(containerId, questions, opts, prefix,startAt = 0) {
   document.getElementById(containerId).innerHTML = html;
 }
 
-function buildDERS(containerId, questions) {
-  let html = "";
-  questions.forEach((q, i) => {
-    html += `<div class="card"><div class="q-text">${q}<span class="q-required">*</span></div>
-      <div class="scale-row-5" id="ders_${i+1}">`;
-    const labels = ["લગભગ ક્યારેય નહીં","ક્યારેક","લગભગ અડધી વખતે","મોટાભાગે","લગભગ હંમેશા"];
-    labels.forEach((l, j) => {
-      html += `<label class="scale-opt">
-        <input type="radio" name="ders_${i+1}" value="${j+1}" onchange="markScale(this,'ders_${i+1}')">
-        <span>${l}</span></label>`;
-    });
-    html += `</div></div>`;
-  });
-  document.getElementById(containerId).innerHTML = html;
-}
 
 
 
