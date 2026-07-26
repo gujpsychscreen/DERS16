@@ -16,6 +16,7 @@ const PHQ9_Q = [
   "૯. એવા વિચારો આવવા કે તમારા કરતા તો મૃત્યુ સારું અથવા તમારી જાતને કોઈ રીતે નુકસાન પહોંચાડવું."
 ];
 const PHQ_OPTS = ["બિલકુલ નહીં","કેટલાક દિવસો","અડધાથી વધુ દિવસો","લગભગ દરેક દિવસે"];
+buildLikert('phq9_qs', PHQ9_Q, PHQ_OPTS, 'phq9');
 
 const GAD7_Q = [
   "૧. નર્વસ અથવા બેચેની અનુભવવી અથવા ખૂબ જ તણાવમાં રહેવું.",
@@ -26,6 +27,9 @@ const GAD7_Q = [
   "૬. સહેલાઈથી ચીડાઈ જવું અથવા ગુસ્સે થઈ જવું.",
   "૭. એવું લાગવું કે જાણે કંઈક ખરાબ થવાનું છે."
 ];
+const GAD_OPTS = ["બિલકુલ નહીં","કેટલાક દિવસો","અડધાથી વધુ દિવસો","લગભગ દરેક દિવસે"];
+buildLikert('gad7_qs', GAD7_Q, PHQ_OPTS, 'gad7');
+
 
 // DERS-16 Gujarati items — replace placeholders with actual translated items
 const DERS16_Q = [
@@ -47,6 +51,7 @@ const DERS16_Q = [
   "૧૬. [DERS-16 Item 16 — Gujarati translation pending]"
 ];
 const DERS16_OPTS = ["લગભગ ક્યારેય નહીં","ક્યારેક","લગભગ અડધી વખતે","મોટાભાગે","લગભગ હંમેશા"];
+buildDERS('ders16_qs', DERS16_Q);
 
 const BEDS_Q = [
   "1. હું સરળતાથી રડી પડું છું.",
@@ -63,6 +68,7 @@ const BEDS_Q = [
   "12. મારી લાગણીઓ મારા પર કાબૂ કરતી નથી."
 ];
 const BEDS_OPTS = ["એકદમ/પૂર્ણ રીતે/સંપૂર્ણપણે અસહમત","અસહમત","સહમત","એકદમ/પૂર્ણ રીતે/સંપૂર્ણપણે સહમત"];
+buildLikert('beds_qs', BEDS_Q, BEDS_OPTS, 'beds',1);
 
 const LPFS_Q = [
   "1. હું ઘણીવાર એ નથી જાણતો/જાણતી કે હું ખરેખર કોણ છું.",
@@ -79,6 +85,7 @@ const LPFS_Q = [
   "12. હું ઘણીવાર બીજા લોકો સાથે પરસ્પર(અરસપરસ)  સંતોષકારક રીતે સહકારપૂર્ણ  વ્યવહાર કરવામાં સફળ થતો/થતી નથી."
 ];
 const LPFS_OPTS = ["સાવ ખોટું/મોટાભાગે ખોટું","ક્યારેક ખોટું","ક્યારેક સાચું","સાવ સાચું/મોટાભાગે સાચું"];
+buildLikert('lpfs_qs', LPFS_Q, LPFS_OPTS, 'lpfs',1);
 
 const SAPAS_Q = [
   "1. સામાન્ય રીતે, શું તમને મિત્રો બનાવવામાં અને જાળવવામાં તકલીફ પડે છે?",
@@ -90,6 +97,7 @@ const SAPAS_Q = [
   "7. સામાન્ય રીતે, શું તમે બીજા લોકો પર બહુ આધાર રાખો છો?",
   "8. સામાન્ય રીતે, શું તમારો સ્વભાવ વધુ પડતી ચોકસાઈ વાળો છે?"
 ];
+buildYesNo('sapas_qs', SAPAS_Q, 'sapas');
 
 function buildLikert(containerId, questions, opts, prefix,startAt = 0) {
   let html = "";
@@ -213,12 +221,6 @@ function collectData() {
 
 
 // Build all dynamic sections
-buildLikert('phq9_qs', PHQ9_Q, PHQ_OPTS, 'phq9');
-buildLikert('gad7_qs', GAD7_Q, PHQ_OPTS, 'gad7');
-buildDERS('ders16_qs', DERS16_Q);
-buildLikert('beds_qs', BEDS_Q, BEDS_OPTS, 'beds',1);
-buildLikert('lpfs_qs', LPFS_Q, LPFS_OPTS, 'lpfs',1);
-buildYesNo('sapas_qs', SAPAS_Q, 'sapas');
 
 
 function checkConsent() {
