@@ -254,6 +254,10 @@ function collectData() {
   document.querySelectorAll('input[type=radio]:checked').forEach(el => { data[el.name] = el.value; });
   data['age'] = document.getElementById('age').value;
   data['education'] = document.querySelector('input[name="education"]:checked')?.value || '';
+  
+  if (window.formStartTime && window.formEndTime) {
+    data['duration_sec'] = Math.round((window.formEndTime - window.formStartTime) / 1000);
+  }
   return data;
 }
 
@@ -273,6 +277,7 @@ function checkConsent() {
   }
 
   if (consent1.value === "હા" && consent2.value === "હા") {
+    window.formStartTime = Date.now();
 
     // Eligible -> continue form
     goTo(3);
@@ -305,6 +310,7 @@ async function sendData() {
 }
 
 async function submitForm() {
+  window.formEndTime = Date.now();
   await sendData();
   goTo(10);
 }
